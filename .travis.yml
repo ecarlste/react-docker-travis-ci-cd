@@ -1,0 +1,9 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t ecarlste/react-docker-travis-ci-cd -f Dockerfile.dev .
+
+script:
+  - docker run ecarlste/react-docker-travis-ci-cd npm run test -- --coverage
