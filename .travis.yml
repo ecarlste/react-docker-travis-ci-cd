@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run ecarlste/react-docker-travis-ci-cd npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east-1'
+  app: 'react-docker-travis-ci-cd'
+  env: 'ReactDockerTravisCiCd-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-607366447514'
+  bucket_path: 'react-docker-travis-ci-cd'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: '$AWS_SECRET_KEY'
